@@ -1,20 +1,18 @@
 package QLNS.view;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
 
 public class FrmChucVu extends JPanel {
 
-    // ===== BUTTON =====
-    public JButton btnThem, btnLuu, btnXoa, btnTim;
-
-    // ===== TABLE =====
-    private JTable table;
-
     // ===== FIELD =====
-    private JTextField txtMaCV, txtTenCV, txtMoTa, txtTim;
+    public JTextField txtMaCV, txtTenCV, txtMoTa, txtTim;
+    public JButton btnThem, btnLuu, btnXoa, btnTim;
+    public JTable table;
+    public DefaultTableModel model;
 
     public FrmChucVu() {
         initUI();
@@ -73,7 +71,13 @@ public class FrmChucVu extends JPanel {
 
         pnlCenter.add(pnlSearch, BorderLayout.NORTH);
 
-        table = new JTable();
+        String[] columnNames = {
+            "Mã CV", "Tên chức vụ", "Mô tả"
+        };
+        
+        model = new DefaultTableModel(columnNames, 0);
+        table = new JTable(model);
+        
         JScrollPane scroll = new JScrollPane(table);
         scroll.setBorder(BorderFactory.createTitledBorder("Danh sách chức vụ"));
 
@@ -81,8 +85,7 @@ public class FrmChucVu extends JPanel {
         add(pnlCenter, BorderLayout.CENTER);
     }
 
-    /* ================= DATA ================= */
-    public void showData(List<Object[]> list) {
+    public void showData(java.util.List<Object[]> list) {
         DefaultTableModel model = new DefaultTableModel(
                 new String[]{"Mã CV", "Tên chức vụ", "Mô tả"}, 0
         );
@@ -136,4 +139,22 @@ public class FrmChucVu extends JPanel {
     public JTable getTable() {
         return table;
     }
+    
+    // ===== NEW METHODS FOR MVC PATTERN =====
+    public void addAddListener(ActionListener listener) {
+        btnThem.addActionListener(listener);
+    }
+    
+    public void addEditListener(ActionListener listener) {
+        btnLuu.addActionListener(listener);
+    }
+    
+    public void addDeleteListener(ActionListener listener) {
+        btnXoa.addActionListener(listener);
+    }
+    
+    public void addTableClickListener(MouseListener listener) {
+        table.addMouseListener(listener);
+    }
 }
+

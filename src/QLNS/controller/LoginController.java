@@ -1,49 +1,38 @@
 package QLNS.controller;
 
-
 import QLNS.dao.TaiKhoanDAO;
 import QLNS.model.TaiKhoan;
-import QLNS.view.FrmLogin;
-import QLNS.view.FrmMain;
-
-import javax.swing.*;
+import QLNS.view.LoginView;
 
 public class LoginController {
 
-    private FrmLogin view;
-    private TaiKhoanDAO dao = new TaiKhoanDAO();
+    private LoginView view;
+    private TaiKhoanDAO dao;
 
-    public LoginController(FrmLogin view) {
-        this.view = view;
-        init();
-    }
+    public LoginController() {
+        view = new LoginView();
+        view.addLoginListener(e -> login());
+        view.setVisible(true);
 
-    private void init() {
-        view.getBtnLogin().addActionListener(e -> login());
+        try {
+            dao = new TaiKhoanDAO();
+        } catch (Exception ex) {
+            view.showMessage("Không thể kết nối MySQL!");
+        }
     }
 
     private void login() {
-        String tk = view.getTxtTaiKhoan().getText().trim();
-        String mk = new String(view.getTxtMatKhau().getPassword()).trim();
+        TaiKhoan user = view.getUser();
 
-        if (tk.isEmpty()) {
-            JOptionPane.showMessageDialog(view, "Chưa nhập tài khoản");
-            return;
-        }
-        if (mk.isEmpty()) {
-            JOptionPane.showMessageDialog(view, "Chưa nhập mật khẩu");
-            return;
-        }
-
-        TaiKhoan acc = dao.login(tk, mk);
-        if (acc != null) {
-            new FrmMain(acc.getMaNhanVien(), acc.getLoaiTaiKhoan()).setVisible(true);
+        if (dao.checkLogin(user.getTenTaiKhoan(), user.getMatKhau())) {
+            view.showMessage("Đăng nhập thành công!");
             view.dispose();
+
+            new NhanVienController();  // Start the employee management interface after login
         } else {
-            JOptionPane.showMessageDialog(view,
-                    "Tài khoản hoặc mật khẩu không đúng",
-                    "Thông báo",
-                    JOptionPane.WARNING_MESSAGE);
+            view.showMessage("Sai tài khoản hoặc mật khẩu!");
         }
     }
+
 }
+

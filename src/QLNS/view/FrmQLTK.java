@@ -6,6 +6,8 @@ import QLNS.model.TaiKhoan;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 public class FrmQLTK extends JPanel {
@@ -175,4 +177,22 @@ public class FrmQLTK extends JPanel {
     public JTable getTable() { return table; }
     public JComboBox<String> getCboLoaiTK() { return cboLoaiTK; }
     public JComboBox<String> getCboMaNV() { return cboMaNV; }
+    
+    // ===== NEW METHODS FOR MVC PATTERN =====
+    public void addAddListener(ActionListener listener) {
+        btnThem.addActionListener(listener);
+    }
+    
+    public void addEditListener(ActionListener listener) {
+        btnLuu.addActionListener(listener);
+    }
+    
+    public void addDeleteListener(ActionListener listener) {
+        btnXoa.addActionListener(listener);
+    }
+    
+    public void addTableClickListener(MouseListener listener) {
+        table.addMouseListener(listener);
+    }
 }
+

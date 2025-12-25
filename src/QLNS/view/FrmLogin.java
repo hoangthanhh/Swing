@@ -1,9 +1,7 @@
 package QLNS.view;
 
-import QLNS.controller.LoginController;
-
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class FrmLogin extends JFrame {
 
@@ -19,8 +17,6 @@ public class FrmLogin extends JFrame {
 
         setLayout(new GridBagLayout());
         initUI();
-
-        new LoginController(this);
     }
 
     private void initUI() {
@@ -28,7 +24,6 @@ public class FrmLogin extends JFrame {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // Title
         JLabel lblTitle = new JLabel("LOGIN SYSTEM", SwingConstants.CENTER);
         lblTitle.setFont(new Font("Arial", Font.BOLD, 20));
         gbc.gridx = 0;
@@ -36,7 +31,6 @@ public class FrmLogin extends JFrame {
         gbc.gridwidth = 2;
         add(lblTitle, gbc);
 
-        // Username
         gbc.gridwidth = 1;
         gbc.gridy = 1;
         gbc.gridx = 0;
@@ -46,7 +40,6 @@ public class FrmLogin extends JFrame {
         gbc.gridx = 1;
         add(txtTaiKhoan, gbc);
 
-        // Password
         gbc.gridx = 0;
         gbc.gridy = 2;
         add(new JLabel("Mật khẩu:"), gbc);
@@ -55,7 +48,6 @@ public class FrmLogin extends JFrame {
         gbc.gridx = 1;
         add(txtMatKhau, gbc);
 
-        // Button Login
         btnLogin = new JButton("Đăng nhập");
         btnLogin.setBackground(new Color(41, 128, 185));
         btnLogin.setForeground(Color.WHITE);

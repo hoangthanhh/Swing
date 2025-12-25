@@ -1,13 +1,11 @@
 package QLNS.app;
 
-import QLNS.view.FrmLogin;
-
-import javax.swing.*;
+import QLNS.controller.LoginController;
 
 public class Main {
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new FrmLogin().setVisible(true);
-        });
+        new LoginController();
     }
 }
+

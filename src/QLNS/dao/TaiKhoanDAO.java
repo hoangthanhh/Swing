@@ -11,6 +11,27 @@ import java.util.List;
 
 public class TaiKhoanDAO {
 
+    /* ================= CHECK LOGIN (NEW - FOR QUANLYNHSU PATTERN) ================= */
+    public boolean checkLogin(String tenTK, String matKhau) {
+        String sql = "SELECT COUNT(*) FROM TaiKhoan WHERE TenTaiKhoan=? AND MatKhau=?";
+        
+        try (
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+            ps.setString(1, tenTK);
+            ps.setString(2, matKhau);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Return true if count > 0
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
     /* ================= LOGIN (GIỮ NGUYÊN) ================= */
     public TaiKhoan login(String tenTK, String matKhau) {
         String sql = "SELECT MaNhanVien, LoaiTaiKhoan "
@@ -80,6 +101,24 @@ public class TaiKhoanDAO {
         return false;
     }
 
+    /* ================= CẬP NHẬT TÀI KHOẢN ================= */
+    public boolean update(TaiKhoan tk) {
+        String sql = "UPDATE TaiKhoan SET MatKhau=?, LoaiTaiKhoan=?, MaNhanVien=? WHERE TenTaiKhoan=?";
+        try (
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+            ps.setString(1, tk.getMatKhau());
+            ps.setString(2, tk.getLoaiTaiKhoan());
+            ps.setString(3, tk.getMaNhanVien());
+            ps.setString(4, tk.getTenTaiKhoan());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     /* ================= XÓA TÀI KHOẢN ================= */
     public boolean delete(String tenTK) {
         String sql = "DELETE FROM TaiKhoan WHERE TenTaiKhoan=?";
@@ -95,3 +134,4 @@ public class TaiKhoanDAO {
         return false;
     }
 }
+

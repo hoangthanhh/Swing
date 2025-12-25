@@ -1,21 +1,19 @@
 package QLNS.view;
 
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class FrmPhongBan extends JPanel {
 
-    // ===== BUTTON =====
-    public JButton btnThem, btnLuu, btnXoa, btnTim;
-
-    // ===== TABLE =====
-    private JTable table;
-
     // ===== FIELD =====
-    private JTextField txtMaPB, txtTenPB, txtTim;
-    private JFormattedTextField txtNgayThanhLap;
-    private JTextArea txtGhiChu;
+    public JTextField txtMaPB, txtTenPB, txtTim, txtNgayThanhLap;
+    public JTextArea txtGhiChu;
+    public JButton btnThem, btnLuu, btnXoa, btnTim;
+    public JTable table;
+    public DefaultTableModel model;
 
     public FrmPhongBan() {
         initUI();
@@ -53,8 +51,7 @@ public class FrmPhongBan extends JPanel {
         pnlInfo.add(new JLabel("Ngày thành lập:"), gbc);
 
         gbc.gridx = 1;
-        txtNgayThanhLap = new JFormattedTextField();
-        txtNgayThanhLap.setColumns(15);
+        txtNgayThanhLap = new JTextField(15);
         pnlInfo.add(txtNgayThanhLap, gbc);
 
         gbc.gridx = 2;
@@ -94,7 +91,13 @@ public class FrmPhongBan extends JPanel {
         pnlCenter.add(pnlAction, BorderLayout.NORTH);
 
         // ===== TABLE =====
-        table = new JTable();
+        String[] columnNames = {
+            "Mã PB", "Tên phòng ban", "Ngày thành lập", "Ghi chú"
+        };
+        
+        model = new DefaultTableModel(columnNames, 0);
+        table = new JTable(model);
+        
         JScrollPane scroll = new JScrollPane(table);
         scroll.setBorder(BorderFactory.createTitledBorder("Danh sách phòng ban"));
 
@@ -102,14 +105,7 @@ public class FrmPhongBan extends JPanel {
 
         add(pnlCenter, BorderLayout.CENTER);
 
-        initTable();
         enableForm(false);
-    }
-
-    private void initTable() {
-        table.setModel(new DefaultTableModel(
-                new String[]{"Mã PB", "Tên phòng ban", "Ngày thành lập", "Ghi chú"}, 0
-        ));
     }
 
     // ===== FORM UTILS =====
@@ -135,6 +131,24 @@ public class FrmPhongBan extends JPanel {
     public JTable getTable() { return table; }
     public JTextField getTxtMaPB() { return txtMaPB; }
     public JTextField getTxtTenPB() { return txtTenPB; }
-    public JFormattedTextField getTxtNgayThanhLap() { return txtNgayThanhLap; }
+    public JTextField getTxtNgayThanhLap() { return txtNgayThanhLap; }
     public JTextArea getTxtGhiChu() { return txtGhiChu; }
+    
+    // ===== NEW METHODS FOR MVC PATTERN =====
+    public void addAddListener(ActionListener listener) {
+        btnThem.addActionListener(listener);
+    }
+    
+    public void addEditListener(ActionListener listener) {
+        btnLuu.addActionListener(listener);
+    }
+    
+    public void addDeleteListener(ActionListener listener) {
+        btnXoa.addActionListener(listener);
+    }
+    
+    public void addTableClickListener(MouseListener listener) {
+        table.addMouseListener(listener);
+    }
 }
+

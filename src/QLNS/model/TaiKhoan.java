@@ -11,10 +11,10 @@ public class TaiKhoan {
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String maNhanVien, String loaiTaiKhoan) {
-        this.maNhanVien = maNhanVien;
-        this.loaiTaiKhoan = loaiTaiKhoan;
-    }
+    // public TaiKhoan(String maNhanVien, String loaiTaiKhoan) {
+    //     this.maNhanVien = maNhanVien;
+    //     this.loaiTaiKhoan = loaiTaiKhoan;
+    // }
 
     public TaiKhoan(String tenTaiKhoan, String matKhau,
             String loaiTaiKhoan, String maNhanVien) {
@@ -22,6 +22,11 @@ public class TaiKhoan {
         this.matKhau = matKhau;
         this.loaiTaiKhoan = loaiTaiKhoan;
         this.maNhanVien = maNhanVien;
+    }
+
+    public TaiKhoan(String tenTaiKhoan, String matKhau) {
+        this.tenTaiKhoan = tenTaiKhoan;
+        this.matKhau = matKhau;
     }
 
     public int getId() {
@@ -65,3 +70,4 @@ public class TaiKhoan {
     }
 
 }
+

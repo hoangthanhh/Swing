@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/javaswing/src/kiemtra2/view/FrmDiemRenLuyen.java</file>
-            <file>file:/D:/javaswing/src/kiemtra2/controller/DiemRenLuyenController.java</file>
-            <file>file:/D:/javaswing/src/kiemtra2/dao/DBConnection.java</file>
-            <file>file:/D:/javaswing/src/QLNS/controller/LoaiTaiKhoanController.java</file>
-            <file>file:/D:/javaswing/src/QLNS/app/Main.java</file>
-            <file>file:/D:/javaswing/src/kiemtra2/model/DiemRenLuyen.java</file>
-            <file>file:/D:/javaswing/src/QLNS/view/FrmChucVu.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/QLNS/controller/LoaiTaiKhoanController.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/QLCSKH/Main.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/QLCSKH/MainFrame.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/QLNS/app/Main.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/QLCSKH/DatabaseConnection.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/QLCSKH/TicketPanel.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/QLNS/model/TaiKhoan.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/QLCSKH/LoginFrame.java</file>
+            <file>file:/Users/vinhdv/Documents/clone/JavaThanh/src/MVCNhanVien/Main.java</file>
         </group>
     </open-files>
 </project-private>
