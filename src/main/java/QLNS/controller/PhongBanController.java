@@ -106,7 +106,7 @@ public class PhongBanController {
             int year = cal.get(Calendar.YEAR);
 
             if (year < 1900) {
-                JOptionPane.showMessageDialog(view, "Năm sinh phải lớn hơn hoặc bằng 1900!");
+                JOptionPane.showMessageDialog(view, "Năm thành lập phải lớn hơn hoặc bằng 1900!");
                 return false;
             }
 

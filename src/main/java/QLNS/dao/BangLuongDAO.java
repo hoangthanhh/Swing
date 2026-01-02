@@ -56,4 +56,50 @@ public class BangLuongDAO {
         } catch (Exception e) { e.printStackTrace(); }
         return false;
     }
+
+    public List<Object[]> search(String keyword) {
+        List<Object[]> list = new ArrayList<>();
+        String sql = "SELECT nv.MaNhanVien, nv.HoTen, nv.NgaySinh, nv.DiaChi, nv.GioiTinh, nv.SDT, " +
+                "pb.TenPhongBan, cv.TenChucVu, " +
+                "COALESCE(l.LuongCoBan, 0), " +
+                "COALESCE(pc.TienPhuCap, 0), " +
+                "COALESCE(t.SoTien, 0), " +
+                "(COALESCE(l.LuongCoBan, 0) + COALESCE(pc.TienPhuCap, 0) + COALESCE(t.SoTien, 0)) AS ThucLinh " +
+                "FROM NhanVien nv " +
+                "LEFT JOIN PhongBan pb ON nv.MaPhongBan = pb.MaPhongBan " +
+                "LEFT JOIN ChucVu cv ON nv.MaChucVu = cv.MaChucVu " +
+                "LEFT JOIN Luong l ON nv.MaLuong = l.MaLuong " +
+                "LEFT JOIN PhuCap pc ON nv.MaPhuCap = pc.MaPhuCap " +
+                "LEFT JOIN Thuong t ON nv.MaThuong = t.MaThuong " +
+                "WHERE nv.MaNhanVien LIKE ? OR nv.HoTen LIKE ?";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            String query = "%" + keyword + "%";
+            ps.setString(1, query);
+            ps.setString(2, query);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Object[]{
+                        rs.getString("MaNhanVien"),
+                        rs.getString("HoTen"),
+                        rs.getString("NgaySinh"),
+                        rs.getString("DiaChi"),
+                        rs.getString("GioiTinh"),
+                        rs.getString("SDT"),
+                        rs.getString("TenPhongBan"),
+                        rs.getString("TenChucVu"),
+                        rs.getDouble(9),
+                        rs.getDouble(10),
+                        rs.getDouble(11),
+                        rs.getDouble("ThucLinh")
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

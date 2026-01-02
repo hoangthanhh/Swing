@@ -146,6 +146,10 @@ public class NhanVienController {
             JOptionPane.showMessageDialog(viewNV, "Số điện thoại chỉ được chứa ký tự số!");
             return false;
         }
+        if (sdt.length() > 10) {
+            JOptionPane.showMessageDialog(viewNV, "Số điện thoại không được quá 10 số!");
+            return false;
+        }
         return true;
     }
 

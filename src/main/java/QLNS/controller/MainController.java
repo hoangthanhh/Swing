@@ -99,6 +99,11 @@ public class MainController {
             openPanel(viewTraCuu);
         });
 
+        view.getMniTroGiup().addActionListener(e -> {
+            FrmTroGiup viewTroGiup = new FrmTroGiup();
+            openPanel(viewTroGiup);
+        });
+
         view.getMniBaoCao().addActionListener(e -> {
             FrmBaoCao viewBaoCao = new FrmBaoCao();
             new BaoCaoController(viewBaoCao);

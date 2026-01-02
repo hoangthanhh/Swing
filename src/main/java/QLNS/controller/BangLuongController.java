@@ -4,6 +4,7 @@ import QLNS.dao.BangLuongDAO;
 import QLNS.dao.LuongDAO;
 import QLNS.dao.PhuCapDAO;
 import QLNS.dao.ThuongDAO;
+import QLNS.model.ChucVu;
 import QLNS.model.Luong;
 import QLNS.model.PhuCap;
 import QLNS.model.Thuong;
@@ -20,6 +21,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BangLuongController {
 
@@ -294,6 +296,26 @@ public class BangLuongController {
                     loadTable();
                     clearForm();
                 }
+            }
+        });
+
+        view.getBtnTim().addActionListener(e -> {
+            String keyword = view.getTxtTim().getText().trim().toLowerCase();
+
+            if (keyword.isEmpty()) {
+                loadTable();
+            } else {
+                List<Object[]> list = daoBL.getAllBangLuong();
+
+                List<Object[]> listTimKiem = list.stream()
+                        .filter(row -> {
+                            String maNV = row[0] != null ? row[0].toString().toLowerCase() : "";
+                            String hoTen = row[1] != null ? row[1].toString().toLowerCase() : "";
+                            return maNV.contains(keyword) || hoTen.contains(keyword);
+                        })
+                        .collect(Collectors.toList());
+
+                showData(listTimKiem);
             }
         });
 
