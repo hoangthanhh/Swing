@@ -210,5 +210,9 @@ public class PhongBanController {
                 showData(result);
             }
         });
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
+        });
     }
 }

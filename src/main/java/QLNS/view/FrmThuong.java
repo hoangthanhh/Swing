@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class FrmThuong extends JPanel {
 
-    private JButton btnThem, btnSua, btnXoa, btnTim;
+    private JButton btnThem, btnSua, btnXoa, btnTim, btnReset;
     private JTable table;
     private JTextField txtTim;
     private JTextField txtMaThuong, txtSoTien, txtLyDo;
@@ -40,10 +40,12 @@ public class FrmThuong extends JPanel {
         btnThem = new JButton("Thêm");
         btnSua = new JButton("Sửa");
         btnXoa = new JButton("Xóa");
+        btnReset = new JButton("Reset");
 
         pnlBtn.add(btnThem);
         pnlBtn.add(btnSua);
         pnlBtn.add(btnXoa);
+        pnlBtn.add(btnReset);
 
         JPanel pnlTop = new JPanel(new BorderLayout(5, 5));
         pnlTop.add(pnlInput, BorderLayout.CENTER);
@@ -78,6 +80,7 @@ public class FrmThuong extends JPanel {
     public JButton getBtnSua() { return btnSua; }
     public JButton getBtnXoa() { return btnXoa; }
     public JButton getBtnTim() { return btnTim; }
+    public JButton getBtnReset() { return btnReset; }
 
     public JTable getTable() { return table; }
     public JTextField getTxtTim() { return txtTim; }

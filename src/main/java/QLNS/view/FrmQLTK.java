@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class FrmQLTK extends JPanel {
 
-    private JButton btnThem, btnSua, btnXoa, btnTim, btnXuat;
+    private JButton btnThem, btnSua, btnXoa, btnTim, btnXuat, btnReset;
     private JTable table;
     private JTextField txtTenTK, txtTim;
     private JPasswordField txtMatKhau;
@@ -45,11 +45,13 @@ public class FrmQLTK extends JPanel {
         btnSua = new JButton("Sửa");
         btnXoa = new JButton("Xóa");
         btnXuat = new JButton("Xuất excel");
+        btnReset = new JButton("Reset");
 
         pnlBtn.add(btnThem);
         pnlBtn.add(btnSua);
         pnlBtn.add(btnXoa);
         pnlBtn.add(btnXuat);
+        pnlBtn.add(btnReset);
 
         JPanel pnlTop = new JPanel(new BorderLayout(5, 5));
         pnlTop.add(pnlInput, BorderLayout.CENTER);
@@ -89,6 +91,7 @@ public class FrmQLTK extends JPanel {
     public JButton getBtnXoa() { return btnXoa; }
     public JButton getBtnTim() { return btnTim; }
     public JButton getBtnXuat() { return btnXuat; }
+    public JButton getBtnReset() { return btnReset; }
 
     public JTable getTable() { return table; }
     public JTextField getTxtTim() { return txtTim; }

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class FrmTraCuu extends JPanel {
 
-    private JButton btnTim;
+    private JButton btnTim, btnReset;
     private JTable table;
     private JTextField txtTimKiem;
 
@@ -116,6 +116,9 @@ public class FrmTraCuu extends JPanel {
         btnTim = new JButton("Tra cứu");
         pnlSearch.add(btnTim);
 
+        btnReset = new JButton("Reset");
+        pnlSearch.add(btnReset);
+
         table = new JTable();
         table.setModel(new DefaultTableModel(
                 new Object[][]{},
@@ -138,6 +141,7 @@ public class FrmTraCuu extends JPanel {
     }
 
     public JButton getBtnTim() { return btnTim; }
+    public JButton getBtnReset() { return btnReset; }
     public JTextField getTxtTimKiem() { return txtTimKiem; }
     public JTable getTable() { return table; }
 

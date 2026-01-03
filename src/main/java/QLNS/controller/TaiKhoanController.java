@@ -274,5 +274,9 @@ public class TaiKhoanController {
         });
 
         view.getBtnXuat().addActionListener(e -> exportExcel());
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
+        });
     }
 }

@@ -223,5 +223,9 @@ public class LuongController {
                 showData(result);
             }
         });
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
+        });
     }
 }

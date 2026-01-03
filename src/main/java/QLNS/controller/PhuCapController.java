@@ -251,5 +251,9 @@ public class PhuCapController {
                 showData(result);
             }
         });
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
+        });
     }
 }

@@ -63,6 +63,22 @@ public class BaoCaoController {
         return val != null ? val.toString() : "";
     }
 
+    private void clearForm() {
+        view.getTxtMaNV().setText("");
+        view.getTxtHoTen().setText("");
+        view.getTxtNgaySinh().setText("");
+        view.getTxtDiaChi().setText("");
+        view.getTxtSDT().setText("");
+        view.getRdoNam().setSelected(true);
+        view.getTxtPhongBan().setText("");
+        view.getTxtChucVu().setText("");
+        view.getTxtLuongCB().setText("");
+        view.getTxtPhuCap().setText("");
+        view.getTxtThuong().setText("");
+        view.getTxtThucLinh().setText("");
+        view.getTable().clearSelection();
+    }
+
     private void exportExcel() {
         JTable table = view.getTable();
         if (table.getRowCount() == 0) {
@@ -131,6 +147,10 @@ public class BaoCaoController {
             public void mouseClicked(MouseEvent e) {
                 fillFormFromTable();
             }
+        });
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
         });
     }
 }

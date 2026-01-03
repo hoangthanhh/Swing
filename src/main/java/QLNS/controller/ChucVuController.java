@@ -176,5 +176,9 @@ public class ChucVuController {
                 showData(result);
             }
         });
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
+        });
     }
 }

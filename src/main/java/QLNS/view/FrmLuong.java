@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class FrmLuong extends JPanel {
 
-    private JButton btnThem, btnSua, btnXoa, btnTim;
+    private JButton btnThem, btnSua, btnXoa, btnTim, btnReset;
     private JTable table;
     private JTextField txtTim;
     private JTextField txtMaLuong, txtLuongCoBan, txtGhiChu;
@@ -36,15 +36,16 @@ public class FrmLuong extends JPanel {
         pnlInput.add(new JLabel("Lương cơ bản:")); pnlInput.add(txtLuongCoBan);
         pnlInput.add(new JLabel("Ghi chú:")); pnlInput.add(txtGhiChu);
 
-        /* ===== BUTTON PANEL ===== */
         JPanel pnlBtn = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 20));
         btnThem = new JButton("Thêm");
         btnSua = new JButton("Sửa");
         btnXoa = new JButton("Xóa");
+        btnReset = new JButton("Reset");
 
         pnlBtn.add(btnThem);
         pnlBtn.add(btnSua);
         pnlBtn.add(btnXoa);
+        pnlBtn.add(btnReset);
 
         JPanel pnlTop = new JPanel(new BorderLayout(5, 5));
         pnlTop.add(pnlInput, BorderLayout.CENTER);
@@ -67,7 +68,6 @@ public class FrmLuong extends JPanel {
         pnlCenter.add(pnlSearch, BorderLayout.NORTH);
 
         table = new JTable();
-        // Empty model initially
         table.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Mã lương", "Lương cơ bản", "Ghi chú"}));
 
         JScrollPane scroll = new JScrollPane(table);
@@ -80,6 +80,7 @@ public class FrmLuong extends JPanel {
     public JButton getBtnSua() { return btnSua; }
     public JButton getBtnXoa() { return btnXoa; }
     public JButton getBtnTim() { return btnTim; }
+    public JButton getBtnReset() { return btnReset; }
 
     public JTable getTable() { return table; }
     public JTextField getTxtTim() { return txtTim; }

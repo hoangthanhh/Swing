@@ -6,8 +6,7 @@ import java.awt.*;
 
 public class FrmBaoCao extends JPanel {
 
-    // UI Components
-    private JButton btnTim, btnXuat;
+    private JButton btnTim, btnXuat, btnReset;
     private JTable table;
     private JTextField txtTimKiem;
 
@@ -120,6 +119,9 @@ public class FrmBaoCao extends JPanel {
         btnXuat = new JButton("Xuất excel");
         pnlSearch.add(btnXuat);
 
+        btnReset = new JButton("Reset");
+        pnlSearch.add(btnReset);
+
         table = new JTable();
         table.setModel(new DefaultTableModel(
                 new Object[][]{},
@@ -143,6 +145,7 @@ public class FrmBaoCao extends JPanel {
 
     public JButton getBtnTim() { return btnTim; }
     public JButton getBtnXuat() { return btnXuat; }
+    public JButton getBtnReset() { return btnReset; }
     public JTextField getTxtTimKiem() { return txtTimKiem; }
     public JTable getTable() { return table; }
 

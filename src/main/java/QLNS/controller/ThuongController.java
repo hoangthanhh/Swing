@@ -211,5 +211,9 @@ public class ThuongController {
                 showData(result);
             }
         });
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
+        });
     }
 }

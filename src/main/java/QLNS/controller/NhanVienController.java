@@ -276,6 +276,10 @@ public class NhanVienController {
                 showData(res);
             }
         });
+
+        viewNV.getBtnReset().addActionListener(e -> {
+            clearForm();
+        });
     }
 
     public void loadComboBoxMaNV() {

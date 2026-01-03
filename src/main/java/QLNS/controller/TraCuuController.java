@@ -61,6 +61,22 @@ public class TraCuuController {
         return val != null ? val.toString() : "";
     }
 
+    private void clearForm() {
+        view.getTxtMaNV().setText("");
+        view.getTxtHoTen().setText("");
+        view.getTxtNgaySinh().setText("");
+        view.getTxtDiaChi().setText("");
+        view.getTxtSDT().setText("");
+        view.getRdoNam().setSelected(true);
+        view.getTxtPhongBan().setText("");
+        view.getTxtChucVu().setText("");
+        view.getTxtLuongCB().setText("");
+        view.getTxtPhuCap().setText("");
+        view.getTxtThuong().setText("");
+        view.getTxtThucLinh().setText("");
+        view.getTable().clearSelection();
+    }
+
     private void initEvents() {
         view.getBtnTim().addActionListener(e -> {
             String keyword = view.getTxtTimKiem().getText().trim();
@@ -73,6 +89,10 @@ public class TraCuuController {
             public void mouseClicked(MouseEvent e) {
                 fillFormFromTable();
             }
+        });
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
         });
     }
 }

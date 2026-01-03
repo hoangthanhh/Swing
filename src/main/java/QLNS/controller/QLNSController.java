@@ -255,5 +255,9 @@ public class QLNSController {
         });
 
         view.getBtnXuat().addActionListener(e -> exportExcel());
+
+        view.getBtnReset().addActionListener(e -> {
+            clearForm();
+        });
     }
 }
