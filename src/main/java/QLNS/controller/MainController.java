@@ -44,8 +44,8 @@ public class MainController {
         });
 
         view.getMniThongTinCaNhan().addActionListener(e -> {
-            FrmThongTinCaNhan viewNV = new FrmThongTinCaNhan();
-            new NhanVienController(viewNV);
+            FrmThongTinCaNhan viewNV = new FrmThongTinCaNhan(view.getMaNhanVien());
+            new NhanVienController(viewNV, view.getMaNhanVien());
             openPanel(viewNV);
         });
 

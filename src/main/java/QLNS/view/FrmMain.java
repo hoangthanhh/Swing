@@ -112,11 +112,11 @@ public class FrmMain extends JFrame {
         mnuDanhMuc.add(mniPhuCap);
 
         mnuQuanLy.add(mniQLNS);
-        mnuDanhMuc.addSeparator();
+        mnuQuanLy.addSeparator();
         mnuQuanLy.add(mniBangLuong);
 
         mnuChucNang.add(mniTraCuu);
-        mnuDanhMuc.addSeparator();
+        mnuChucNang.addSeparator();
         mnuChucNang.add(mniTroGiup);
 
 

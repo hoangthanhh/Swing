@@ -21,9 +21,15 @@ public class NhanVienController {
     private FrmThongTinCaNhan viewNV;
     private FrmQLTK viewTK;
     private NhanVienDAO dao;
+    private String currentMaNV; // Store the current user's ID
 
     public NhanVienController(FrmThongTinCaNhan view) {
+        this(view, null);
+    }
+
+    public NhanVienController(FrmThongTinCaNhan view, String currentMaNV) {
         this.viewNV = view;
+        this.currentMaNV = currentMaNV;
         try {
             this.dao = new NhanVienDAO();
         } catch (Exception e) {
@@ -93,11 +99,17 @@ public class NhanVienController {
     }
 
     private String getSelectedMaNV() {
-        int row = viewNV.getTable().getSelectedRow();
-        if (row >= 0) {
-            return viewNV.getTable().getValueAt(row, 0).toString();
+        if (currentMaNV != null && !currentMaNV.isEmpty()) {
+            // For personal info view, always return the current user's ID
+            return currentMaNV;
+        } else {
+            // For admin/manager view, return selected row's ID
+            int row = viewNV.getTable().getSelectedRow();
+            if (row >= 0) {
+                return viewNV.getTable().getValueAt(row, 0).toString();
+            }
+            return null;
         }
-        return null;
     }
 
     private void clearForm() {
@@ -155,8 +167,47 @@ public class NhanVienController {
 
     private void loadTable() {
         if (viewNV != null) {
-            List<NhanVien> list = dao.getAll();
+            List<NhanVien> list;
+            if (currentMaNV != null && !currentMaNV.isEmpty()) {
+                // For personal info view, only load the current user's data
+                NhanVien currentUser = dao.getByMaNV(currentMaNV);
+                if (currentUser != null) {
+                    list = List.of(currentUser);
+                    // Also disable buttons that shouldn't be available for personal info
+                    viewNV.getBtnThem().setEnabled(false);
+                    viewNV.getBtnXoa().setEnabled(false);
+                    viewNV.getBtnTim().setEnabled(false);
+                    viewNV.getTxtTim().setEnabled(false);
+                    // Disable table selection to prevent viewing other records
+                    viewNV.getTable().setEnabled(false);
+                } else {
+                    list = List.of(); // Empty list if user not found
+                }
+            } else {
+                // For admin/manager view, load all employees
+                list = dao.getAll();
+            }
             showData(list);
+
+            // If it's personal info view, auto-select the user's record and disable editing of MaNV
+            if (currentMaNV != null && !currentMaNV.isEmpty() && !list.isEmpty()) {
+                // Auto-fill the form with the user's data
+                NhanVien nv = list.get(0);
+                viewNV.getTxtMaNV().setText(nv.getMaNV());
+                viewNV.getTxtHoTen().setText(nv.getHoTen());
+                viewNV.getTxtNgaySinh().setText(nv.getNgaySinh());
+                viewNV.getTxtDiaChi().setText(nv.getDiaChi());
+                viewNV.getTxtSDT().setText(nv.getSdt());
+
+                if ("Nam".equalsIgnoreCase(nv.getGioiTinh())) {
+                    viewNV.getRdoNam().setSelected(true);
+                } else {
+                    viewNV.getRdoNu().setSelected(true);
+                }
+
+                // Disable editing of MaNV field
+                viewNV.getTxtMaNV().setEnabled(false);
+            }
         }
     }
 
@@ -164,7 +215,10 @@ public class NhanVienController {
         viewNV.getTable().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                fillFormFromTable();
+                // Prevent selection in personal info view
+                if (currentMaNV == null || currentMaNV.isEmpty()) {
+                    fillFormFromTable();
+                }
             }
         });
 
@@ -204,10 +258,17 @@ public class NhanVienController {
 
         viewNV.getBtnSua().addActionListener(e -> {
             try {
-                String maNV_Cu = getSelectedMaNV();
-                if (maNV_Cu == null) {
-                    JOptionPane.showMessageDialog(viewNV, "Vui lòng chọn nhân viên cần sửa!");
-                    return;
+                String maNV_Cu;
+                if (currentMaNV != null && !currentMaNV.isEmpty()) {
+                    // For personal info view, only allow updating the current user's record
+                    maNV_Cu = currentMaNV;
+                } else {
+                    // For admin/manager view, allow updating selected record
+                    maNV_Cu = getSelectedMaNV();
+                    if (maNV_Cu == null) {
+                        JOptionPane.showMessageDialog(viewNV, "Vui lòng chọn nhân viên cần sửa!");
+                        return;
+                    }
                 }
 
                 NhanVien nv_Moi = getFormData();
@@ -244,13 +305,19 @@ public class NhanVienController {
 
         viewNV.getBtnXoa().addActionListener(e -> {
             try {
+                // Prevent deletion in personal info view
+                if (currentMaNV != null && !currentMaNV.isEmpty()) {
+                    JOptionPane.showMessageDialog(viewNV, "Bạn không có quyền xóa thông tin!");
+                    return;
+                }
+
                 String maNV = getSelectedMaNV();
                 if (maNV == null) {
                     JOptionPane.showMessageDialog(viewNV, "Vui lòng chọn nhân viên cần xóa!");
                     return;
                 }
                 int confirm = JOptionPane.showConfirmDialog(viewNV, "Xóa nhân viên: " + maNV + "?", "Xác nhận", JOptionPane.YES_NO_OPTION);
-                if (confirm == JOptionPane.YES_OPTION) {
+                if (confirm == JOptionPane.YES_NO_OPTION) {
                     if (dao.delete(maNV)) {
                         JOptionPane.showMessageDialog(viewNV, "Xóa thành công!");
                         loadTable();
@@ -269,7 +336,20 @@ public class NhanVienController {
             if (keyword.isEmpty()) {
                 loadTable();
             } else {
-                List<NhanVien> all = dao.getAll();
+                List<NhanVien> all;
+                if (currentMaNV != null && !currentMaNV.isEmpty()) {
+                    // For personal info view, only search within the current user's data
+                    NhanVien currentUser = dao.getByMaNV(currentMaNV);
+                    if (currentUser != null) {
+                        all = List.of(currentUser);
+                    } else {
+                        all = List.of();
+                    }
+                } else {
+                    // For admin/manager view, search all employees
+                    all = dao.getAll();
+                }
+
                 List<NhanVien> res = all.stream()
                         .filter(nv -> nv.getHoTen().toLowerCase().contains(keyword) || nv.getMaNV().toLowerCase().contains(keyword))
                         .collect(Collectors.toList());

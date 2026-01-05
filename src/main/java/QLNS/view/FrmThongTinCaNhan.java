@@ -12,7 +12,15 @@ public class FrmThongTinCaNhan extends JPanel {
     private JTextField txtMaNV, txtHoTen, txtNgaySinh, txtDiaChi, txtSDT;
     private JRadioButton rdoNam, rdoNu;
 
+    private String currentMaNV; // Store the current user's ID
+
     public FrmThongTinCaNhan() {
+        this.currentMaNV = null;
+        initUI();
+    }
+
+    public FrmThongTinCaNhan(String currentMaNV) {
+        this.currentMaNV = currentMaNV;
         initUI();
     }
 
@@ -107,6 +115,7 @@ public class FrmThongTinCaNhan extends JPanel {
     public JTable getTable() { return table; }
     public JTextField getTxtTim() { return txtTim; }
 
+    public String getCurrentMaNV() { return currentMaNV; }
     public JTextField getTxtMaNV() { return txtMaNV; }
     public JTextField getTxtHoTen() { return txtHoTen; }
     public JTextField getTxtNgaySinh() { return txtNgaySinh; }

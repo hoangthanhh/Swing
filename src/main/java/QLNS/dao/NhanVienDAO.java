@@ -130,6 +130,31 @@ public class NhanVienDAO {
         return list;
     }
 
+    public NhanVien getByMaNV(String maNV) {
+        String sql = "SELECT * FROM NhanVien WHERE MaNhanVien = ?";
+        NhanVien nv = null;
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, maNV);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    nv = new NhanVien();
+                    nv.setMaNV(rs.getString("MaNhanVien"));
+                    nv.setHoTen(rs.getString("HoTen"));
+                    nv.setNgaySinh(rs.getString("NgaySinh"));
+                    nv.setDiaChi(rs.getString("DiaChi"));
+                    nv.setGioiTinh(rs.getString("GioiTinh"));
+                    nv.setSdt(rs.getString("SDT"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return nv;
+    }
+
     public boolean phanCong(String maNV, String maPB, String maCV) {
         String sql = "UPDATE NhanVien SET MaPhongBan=?, MaChucVu=? WHERE MaNhanVien=?";
         try (Connection con = DBConnection.getConnection();
