@@ -35,6 +35,7 @@ public class FrmMain extends JFrame {
     JMenu mnuChucNang;
     JMenuItem mniTraCuu;
     JMenuItem mniTroGiup;
+    JMenuItem mniVeTrangChu;
 
     JMenuItem mniBaoCao;
 
@@ -76,6 +77,7 @@ public class FrmMain extends JFrame {
         mnuChucNang = createMenu("Chức năng");
         mniTraCuu = createMenuItem("Tra cứu");
         mniTroGiup = createMenuItem("Trợ giúp");
+        mniVeTrangChu = createMenuItem("Về trang chủ");
 
         mniBaoCao = new JMenuItem("Báo cáo");
         mniBaoCao.setFont(MENU_FONT);
@@ -94,7 +96,8 @@ public class FrmMain extends JFrame {
         menuBar.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         UIManager.put("MenuBar.border", BorderFactory.createEmptyBorder());
-
+        mnuHeThong.add(mniVeTrangChu);
+        mnuHeThong.addSeparator();
         mnuHeThong.add(mniQuanLyTaiKhoan);
         mnuHeThong.addSeparator();
         mnuHeThong.add(mniDangXuat);
@@ -112,6 +115,7 @@ public class FrmMain extends JFrame {
 
         mnuChucNang.add(mniTraCuu);
         mnuChucNang.add(mniTroGiup);
+
 
         menuBar.add(mnuHeThong);
         menuBar.add(mnuDanhMuc);
@@ -199,6 +203,43 @@ public class FrmMain extends JFrame {
         pnlContent.repaint();
     }
 
+    public void resetToWelcomeScreen() {
+        pnlContent.removeAll();
+
+        JPanel pnlWelcome = new JPanel();
+        pnlWelcome.setLayout(new BoxLayout(pnlWelcome, BoxLayout.Y_AXIS));
+        pnlWelcome.setBackground(Color.WHITE);
+        pnlWelcome.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel lblWelcome = new JLabel("CHÀO MỪNG ĐẾN VỚI HỆ THỐNG QUẢN LÝ NHÂN SỰ");
+        lblWelcome.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        lblWelcome.setForeground(PRIMARY_COLOR);
+        lblWelcome.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel lblSub = new JLabel("Phần mềm hỗ trợ quản lý hồ sơ, lương thưởng hiệu quả");
+        lblSub.setFont(new Font("Segoe UI", Font.ITALIC, 18));
+        lblSub.setForeground(Color.GRAY);
+        lblSub.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        pnlWelcome.add(Box.createVerticalGlue()); // Đẩy nội dung vào giữa theo chiều dọc
+        pnlWelcome.add(Box.createRigidArea(new Dimension(0, 20)));
+        pnlWelcome.add(lblWelcome);
+        pnlWelcome.add(Box.createRigidArea(new Dimension(0, 10)));
+        pnlWelcome.add(lblSub);
+        pnlWelcome.add(Box.createVerticalGlue());
+
+        JLabel lblFooter = new JLabel("Phát triển bởi Vinh - Thanh - Quang Anh © 2025", SwingConstants.CENTER);
+        lblFooter.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        lblFooter.setForeground(Color.GRAY);
+        lblFooter.setBorder(new EmptyBorder(10, 0, 0, 0));
+
+        pnlContent.add(pnlWelcome, BorderLayout.CENTER);
+        pnlContent.add(lblFooter, BorderLayout.SOUTH);
+
+        pnlContent.revalidate();
+        pnlContent.repaint();
+    }
+
     public JMenuItem getMniDangXuat() { return mniDangXuat; }
     public JMenuItem getmniQuanLyTaiKhoan() { return mniQuanLyTaiKhoan; }
     public JMenuItem getMniQLNS() { return mniQLNS; }
@@ -213,6 +254,7 @@ public class FrmMain extends JFrame {
     public JMenuItem getMniTroGiup() { return mniTroGiup; }
     public JMenu getMnuQuanLy() { return mnuQuanLy; }
     public JMenuItem getMniBaoCao() { return mniBaoCao; }
+    public JMenuItem getMniVeTrangChu() { return mniVeTrangChu; }
     public String getLoaiTK() { return loaiTK; }
     public String getMaNhanVien() { return maNhanVien; }
 }

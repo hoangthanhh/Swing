@@ -107,6 +107,10 @@ public class MainController {
             new BaoCaoController(viewBaoCao);
             openPanel(viewBaoCao);
         });
+
+        view.getMniVeTrangChu().addActionListener(e -> {
+            view.resetToWelcomeScreen();
+        });
     }
 
     private void openPanel(JPanel panel) {
