@@ -111,6 +111,8 @@ public class MainController {
         view.getMniVeTrangChu().addActionListener(e -> {
             view.resetToWelcomeScreen();
         });
+
+
     }
 
     private void openPanel(JPanel panel) {

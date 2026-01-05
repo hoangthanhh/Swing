@@ -103,6 +103,7 @@ public class FrmMain extends JFrame {
         mnuHeThong.add(mniDangXuat);
 
         mnuDanhMuc.add(mniThongTinCaNhan);
+        mnuDanhMuc.addSeparator();
         mnuDanhMuc.add(mniPhongBan);
         mnuDanhMuc.add(mniChucVu);
         mnuDanhMuc.addSeparator();
@@ -111,9 +112,11 @@ public class FrmMain extends JFrame {
         mnuDanhMuc.add(mniPhuCap);
 
         mnuQuanLy.add(mniQLNS);
+        mnuDanhMuc.addSeparator();
         mnuQuanLy.add(mniBangLuong);
 
         mnuChucNang.add(mniTraCuu);
+        mnuDanhMuc.addSeparator();
         mnuChucNang.add(mniTroGiup);
 
 
