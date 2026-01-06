@@ -92,8 +92,16 @@ public class MainController {
         });
 
         view.getMniTraCuu().addActionListener(e -> {
-            FrmTraCuu viewTraCuu = new FrmTraCuu();
-            new TraCuuController(viewTraCuu);
+            FrmTraCuu viewTraCuu;
+            if (view.getLoaiTK().equalsIgnoreCase("Nhân viên")) {
+                // For employee users, only show their own information
+                viewTraCuu = new FrmTraCuu(view.getMaNhanVien());
+                new TraCuuController(viewTraCuu, view.getMaNhanVien());
+            } else {
+                // For admin/manager users, allow full search functionality
+                viewTraCuu = new FrmTraCuu();
+                new TraCuuController(viewTraCuu);
+            }
             openPanel(viewTraCuu);
         });
 

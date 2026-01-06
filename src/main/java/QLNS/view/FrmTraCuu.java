@@ -15,7 +15,15 @@ public class FrmTraCuu extends JPanel {
     private JTextField txtLuongCB, txtPhuCap, txtThuong, txtThucLinh;
     private JRadioButton rdoNam, rdoNu;
 
+    private String currentMaNV; // Store the current user's ID
+
     public FrmTraCuu() {
+        this.currentMaNV = null;
+        initUI();
+    }
+
+    public FrmTraCuu(String currentMaNV) {
+        this.currentMaNV = currentMaNV;
         initUI();
     }
 
